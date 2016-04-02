@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <script>
+        $db_connect = mysql_connect("localhost","root","", "SMP");
+        if (!$db_connect) {
+            die('Could not connect: ' . mysqli_connect_error());
+        }
+        /*$query = "SELECT * FROM users;";
+        $us = mysqli_query($db_connect, $query);
+        $query = "SELECT * FROM users;";
+        $us = mysqli_query($dbcnx, $query);*/
+        $query = "INSERT INTO users(name,password.email) VALUES('user','1234','mail@mail.ru');";
+        mysqli_query($db_connect, $query);
+    </script>
+    <form action="request.php" method="POST">
+        <input type="submit" value="OK">
+    </form>
+</body>
+</html>
