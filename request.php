@@ -6,7 +6,7 @@
 <body>
     <?php
         include "dbConfig.php";
-        $userName = "Vasya";
+        $userName = $_POST['username'];
         $query = "SELECT * FROM notes_".$userName;
         echo $query;
         $us = mysqli_query($dbcnx, $query);
