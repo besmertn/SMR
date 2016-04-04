@@ -6,7 +6,26 @@
 <body>
     <?php
         include "dbConfig.php";
-        $query = "SELECT * FROM users;";
+        $userName = "Vasya";
+        $query = "SELECT * FROM notes_".$userName;
+        echo $query;
+        $us = mysqli_query($dbcnx, $query);
+        if($us)
+        {
+            while($notes = mysqli_fetch_array($us, MYSQLI_ASSOC))
+            {
+              echo "<br>note id = ".$notes['note_id']."<br>";
+              echo "date = ".$notes['date']."<br>";
+              echo "title = ".$notes['title']."<br>";
+              echo "text = ".$notes['content']."<br>";
+            }
+        }
+        else
+        {
+          echo "<p><b>Error: ".mysqli_error($dbcnx)."</b></p>";
+          exit();
+        }
+        /*$query = "SELECT * FROM users;";
         $us = mysqli_query($dbcnx, $query);
         if($us)
         {
@@ -21,7 +40,7 @@
         {
           echo "<p><b>Error: ".mysqli_error($dbcnx)."</b></p>";
           exit();
-        }
+        }*/
     mysqli_close($dbcnx);
     ?>
 </body>
