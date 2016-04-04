@@ -1,13 +1,5 @@
 <?php
         session_start();
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>SQLRequest</title>
-</head>
-<body>
-    <?php
         include "dbConfig.php";
         $userName = $_SESSION['username'];
         $title = $_POST['title'];
@@ -16,6 +8,5 @@
         $query = "INSERT INTO `SMP`.`notes_".$userName."` (`note_id`, `date`, `title`, `content`) VALUES (NULL, '".$date."', '".$title."', '".$content."')";
         mysqli_query($dbcnx, $query);
         mysqli_close($dbcnx);
+        header("Location:main.php");
     ?>
-</body>
-</html>
