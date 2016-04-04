@@ -9,19 +9,23 @@
         <table>
             <tr>
                 <td><p>Enter your name: </p></td>
-                <td><input type="text" onblur="userName(document.forms[0])" size="20" name="username"></td>
+                <td><input type="text" onblur="userNameCheck(document.forms[0])" size="20" name="username"></td>
+                <td><p id="name_status"></p></td>
             </tr>
              <tr>
                 <td><p>Enter your password: </p></td>
                 <td><input type="password" size="20" name="password"></td>
+                 <td><p id="pas_status"></p></td>
             </tr>
              <tr>
                 <td><p>Enter repeat password: </p></td>
-                <td><input type="password" size="20" name="re_password"></td>
+                <td><input type="password" onblur="passwordCheck(document.forms[0])" size="20" name="re_password"></td>
+                 <td><p id="re_pas_status"></p></td>
             </tr>
              <tr>
                 <td><p>Enter your e-mail: </p></td>
-                <td><input type="text" size="20" name="email"></td>
+                <td><input type="text" onblur="emailCheck(document.forms[0])" size="20" name="email"></td>
+                 <td><p id="email_status"></p></td>
             </tr>
         </table>
        <input type="submit" value="Sgn UP">
