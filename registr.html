@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration</title>
+    <script src="registr.js"></script>
+</head>
+<body>
+    <form action="registr.php" method="POST">
+        <table>
+            <tr>
+                <td><p>Enter your name: </p></td>
+                <td><input type="text" onblur="userName(document.forms[0])" size="20" name="username"></td>
+            </tr>
+             <tr>
+                <td><p>Enter your password: </p></td>
+                <td><input type="password" size="20" name="password"></td>
+            </tr>
+             <tr>
+                <td><p>Enter repeat password: </p></td>
+                <td><input type="password" size="20" name="re_password"></td>
+            </tr>
+             <tr>
+                <td><p>Enter your e-mail: </p></td>
+                <td><input type="text" size="20" name="email"></td>
+            </tr>
+        </table>
+       <input type="submit" value="Sgn UP">
+    </form>
+</body>
+</html>

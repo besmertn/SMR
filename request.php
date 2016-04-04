@@ -1,3 +1,6 @@
+<?php
+        session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +9,7 @@
 <body>
     <?php
         include "dbConfig.php";
-        $userName = $_POST['username'];
+        $userName = $_SESSION['username'];
         $query = "SELECT * FROM notes_".$userName;
         echo $query;
         $us = mysqli_query($dbcnx, $query);
