@@ -4,8 +4,6 @@
     $name = $_POST['name'];
     $check = "false";
     $us = mysqli_query($dbcnx, $query);
-    $t = true;
-    $f = false;
     if($us)
     {
         while($users = mysqli_fetch_array($us, MYSQLI_ASSOC))

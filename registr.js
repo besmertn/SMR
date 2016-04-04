@@ -85,3 +85,26 @@ function emailCheck(form){
         else elStatus.innerHTML = "Incorrect email " ;
     }, 1000);
 }
+
+function authorCheck(form){
+    var status = 0;
+    var elStatus = document.getElementById('auth_status');
+    var name = form.elements.username.value;
+    var pas = form.elements.password.value;
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'authorize.php', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("username=" + encodeURIComponent(name) + "&password=" + encodeURIComponent(pas)); // Отправляем POST-запрос
+    xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
+      if (xmlhttp.readyState == 4) { // Ответ пришёл
+        if(xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+          status = xmlhttp.responseText; // Выводим ответ сервера
+
+        }
+      }
+    };
+    setTimeout(function(){
+      if(status == "false") elStatus.innerHTML = "Such user does not exist!";
+        else document.location.href = "main.php";
+    }, 1000);
+}

@@ -6,15 +6,17 @@
     $_SESSION['username'] = $userName;
     $query = "SELECT * FROM users";
     $us = mysqli_query($dbcnx, $query);
+    $status = "false";
     if($us)
         {
             while($users = mysqli_fetch_array($us, MYSQLI_ASSOC))
             {
               if(strcmp($users['name'], $userName) == 0 && strcmp($users['password'], $password) == 0){
                   mysqli_close($dbcnx);
-                  header("Location:main.php?");
+                  echo $status = "true";
               }
             }
+            echo $status;
 
         }
         else
