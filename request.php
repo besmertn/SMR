@@ -11,7 +11,7 @@
 </head>
 <body>
     <?php
-       include "dbConfig.php";
+        include "dbConfig.php";
         include "content.php";
         $userName = $_SESSION['username'];
         $noteTitleArr = array();
@@ -27,7 +27,7 @@
                 {
 
                     $noteTitleArr[$cnt] = $notes['title'];
-                    $noteContentArr[$cnt] = wordwrap($notes['content'], 40, "\n", 1);
+                    $noteContentArr[$cnt] = wordwrap($notes['content'], 40, "\n",1);
                     $noteDateArr[$cnt] = $notes['date'];
                     $cnt++;
                 }
@@ -61,12 +61,12 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Show Notes</a></li>
-            <li><a href="#about">Add Note</a></li>
+            <li class="active"><a href="request.php">Show Notes</a></li>
+            <li><a href="main.html">Add Note</a></li>
             <li><a href="logOut.php">Log Out</a></li>
           </ul>
-        </div><!-- /.nav-collapse -->
-      </div><!-- /.container -->
+        </div>
+      </div>
     </nav>
     <div class="container">
     <div class="row">
@@ -75,36 +75,28 @@
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
           </p>
           <div class="jumbotron">
-            <h1 id="title"><?php
-                if($noteTitleArr[$cnt])echo $noteTitleArr[$cnt];
-                else echo"Hello ".$userName;
+            <h1 id="title">
+                <?php
+                    if($noteTitleArr[$cnt])echo $noteTitleArr[$cnt];
+                    else echo"Hello ".$userName;
                 ?></h1>
-            <p id="content"><?php
+            <p id="content">
+                <?php
                    if($noteContentArr[$cnt])echo $noteContentArr[$cnt];
                     else echo "You have no notes yet";
                 ?></p>
           </div>
         <div class="row">
-        <?php
-            $id = 0;
-
-            while($noteTitleArr[$id]){
-                echo"<div class='col-xs-6 col-lg-4'><h2 id='title".$id."'>".$noteTitleArr[$cnt]."</h2><p id='content".$id."' hidden>".$noteContentArr[$cnt]."</p><p style='width:20px'>".$noteShortContentArr[$cnt++]."</p><p><a class='btn btn-default' href='javascript:open(".$id.")' role='button'>View details »</a></p></div>";
-                $id++;
-            }
-        ?>
-
-
-          </div><!--/row-->
+            <?php
+                $id = 0;
+                while($noteTitleArr[$id]){
+                    echo "<div class='col-xs-6 col-lg-6'><h2 id='title".$id."'>".$noteTitleArr[$cnt]."</h2><p id='content".$id."' hidden>".$noteContentArr[$cnt]."</p><p>".$noteShortContentArr[$cnt++]."</p><p><a class='btn btn-default' href='javascript:open(".$id.")' role='button'>View details »</a></p></div>";
+                    $id++;
+                }
+            ?>
+          </div>
         </div>
         </div>
     </div>
-    <script type="text/javascript">
-        /*function reloadPage()
-        {
-            window.location.reload()
-        }
-        if(document.getElementById('content').innerHTML == "")reloadPage();*/
-    </script>
 </body>
 </html>
