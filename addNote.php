@@ -8,5 +8,5 @@
         $query = "INSERT INTO `SMP`.`notes_".$userName."` (`note_id`, `date`, `title`, `content`) VALUES (NULL, '".$date."', '".$title."', '".$content."')";
         mysqli_query($dbcnx, $query);
         mysqli_close($dbcnx);
-        header("Location:main.php");
+        header("Location:main.html");
     ?>

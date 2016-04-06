@@ -4,6 +4,7 @@
     $userName = $_POST['username'];
     $password = $_POST['password'];
     $_SESSION['username'] = $userName;
+    $_SESSION['check'] = false;
     $query = "SELECT * FROM users";
     $us = mysqli_query($dbcnx, $query);
     $status = "false";

@@ -5,11 +5,19 @@
 <html>
 <head>
     <title>SQLRequest</title>
+    <meta charset="utf-8">
+     <script src="note.js"></script>
+    <link rel='stylesheet' href='css/bootstrap.min.css' type='text/css' media='all'>
 </head>
 <body>
     <?php
-        include "dbConfig.php";
+       include "dbConfig.php";
+        include "content.php";
         $userName = $_SESSION['username'];
+        $noteTitleArr = array();
+        $noteContentArr = array();
+        $noteDateArr = array();
+        $cnt = 0;
         if($userName != "admin"){
             $query = "SELECT * FROM notes_".$userName;
             $us = mysqli_query($dbcnx, $query);
@@ -17,10 +25,19 @@
             {
                 while($notes = mysqli_fetch_array($us, MYSQLI_ASSOC))
                 {
-                  echo "<br>note id = ".$notes['note_id']."<br>";
-                  echo "date = ".$notes['date']."<br>";
-                  echo "title = ".$notes['title']."<br>";
-                  echo "text = ".$notes['content']."<br>";
+
+                    $noteTitleArr[$cnt] = $notes['title'];
+                    $noteContentArr[$cnt] = wordwrap($notes['content'], 40, "\n", 1);
+                    $noteDateArr[$cnt] = $notes['date'];
+                    $cnt++;
+                }
+                $_SESSION['noteTitleArr'] = $noteTitleArr;
+                $_SESSION['noteContentArr'] = $noteContentArr;
+                $_SESSION['noteDateArr'] = $noteDateArr;
+                $cnt = 0;
+                if(!$_SESSION['check']){
+                    $_SESSION['check'] = true;
+                    echo "<script type='text/javascript'> window.location.reload()</script>";
                 }
             }
             else
@@ -28,27 +45,66 @@
               echo "<p><b>Error: ".mysqli_error($dbcnx)."</b></p>";
               exit();
             }
-            /*$query = "SELECT * FROM users;";
-            $us = mysqli_query($dbcnx, $query);
-            if($us)
-            {
-                while($users = mysqli_fetch_array($us, MYSQLI_ASSOC))
-                {
-                  echo "<br>name = ".$users['name']."<br>";
-                  echo "password = ".$users['password']."<br>";
-                  echo "e-mail = ".$users['email']."<br>";
-                }
-            }
-            else
-            {
-              echo "<p><b>Error: ".mysqli_error($dbcnx)."</b></p>";
-              exit();
-            }*/
         mysqli_close($dbcnx);
     }
     ?>
-    <form>
-        <input type="button" onclick="document.location.href = 'main.php'" value="Back">
-    </form>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Show Notes</a></li>
+            <li><a href="#about">Add Note</a></li>
+            <li><a href="logOut.php">Log Out</a></li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </nav>
+    <div class="container">
+    <div class="row">
+    <div class="col-xs-12 col-sm-12">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron">
+            <h1 id="title"><?php
+                if($noteTitleArr[$cnt])echo $noteTitleArr[$cnt];
+                else echo"Hello ".$userName;
+                ?></h1>
+            <p id="content"><?php
+                   if($noteContentArr[$cnt])echo $noteContentArr[$cnt];
+                    else echo "You have no notes yet";
+                ?></p>
+          </div>
+        <div class="row">
+        <?php
+            $id = 0;
+
+            while($noteTitleArr[$id]){
+                echo"<div class='col-xs-6 col-lg-4'><h2 id='title".$id."'>".$noteTitleArr[$cnt]."</h2><p id='content".$id."' hidden>".$noteContentArr[$cnt]."</p><p style='width:20px'>".$noteShortContentArr[$cnt++]."</p><p><a class='btn btn-default' href='javascript:open(".$id.")' role='button'>View details »</a></p></div>";
+                $id++;
+            }
+        ?>
+
+
+          </div><!--/row-->
+        </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        /*function reloadPage()
+        {
+            window.location.reload()
+        }
+        if(document.getElementById('content').innerHTML == "")reloadPage();*/
+    </script>
 </body>
 </html>
