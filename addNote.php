@@ -2,6 +2,7 @@
         session_start();
         include "dbConfig.php";
         $userName = $_SESSION['username'];
+        $_SESSION['check'] = false;
         $title = $_POST['title'];
         $content = $_POST['content'];
         $date = date("Y-m-d H:i:s");

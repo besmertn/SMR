@@ -3,32 +3,35 @@
 <head>
     <title>Registration</title>
     <script src="registr.js"></script>
+    <link rel='stylesheet' href='css/bootstrap.min.css' type='text/css' media='all'>
+    <link rel='stylesheet' href='css/signin.css' type='text/css' media='all'>
 </head>
 <body>
-    <form action="registr.php" method="POST">
-        <table>
-            <tr>
-                <td><p>Enter your name: </p></td>
-                <td><input type="text" onblur="userNameCheck(document.forms[0])" size="20" name="username"></td>
-                <td><p id="name_status"></p></td>
-            </tr>
-             <tr>
-                <td><p>Enter your password: </p></td>
-                <td><input type="password" size="20" name="password"></td>
-                 <td><p id="pas_status"></p></td>
-            </tr>
-             <tr>
-                <td><p>Enter repeat password: </p></td>
-                <td><input type="password" onblur="passwordCheck(document.forms[0])" size="20" name="re_password"></td>
-                 <td><p id="re_pas_status"></p></td>
-            </tr>
-             <tr>
-                <td><p>Enter your e-mail: </p></td>
-                <td><input type="text" onblur="emailCheck(document.forms[0])" size="20" name="email"></td>
-                 <td><p id="email_status"></p></td>
-            </tr>
-        </table>
-       <input type="submit" value="Sgn UP"><input type="button" onclick="document.location.href = 'index.html'" value="Back">
+
+
+    <form  role="form" action="registr.php" method="POST" class="form-signin">
+        <div class="container">
+        <div id="name_status" class="form-group">
+            <h2 class="form-signin-heading">Regestration</h2>
+            <label id="name_status_label" for="inputUserName" class="control-label">Enter User name</label>
+            <input type="text" name="username"  onblur="userNameCheck(document.forms[0])" id="inputUserName" class="form-control" placeholder="User name" required="" autofocus="">
+        </div>
+         <div id="pas_status" class="form-group">
+            <label id="pas_status_label" for="password" class="control-label">Enter Password</label>
+            <input type="password" size="20" name="password" id="password" class="form-control" placeholder="Password" required="">
+            <div id="auth_status"></div>
+        </div>
+        <div id="re_pas_status" class="form-group">
+            <label id="re_pas_status_label" for="re_password" class="control-label">Confirm password</label>
+            <input onblur="passwordCheck(document.forms[0])" type="password" size="20" name="re_password" id="re_password" class="form-control" placeholder="Confirm password" required="">
+        </div>
+        <div id="email_status" class="form-group">
+            <label id="email_status_label" for="email" class="control-label">Enter E-mail</label>
+            <input onchange="emailCheck(document.forms[0])" type="email" size="20" name="email" id="email" class="form-control" placeholder="E-mail" required="">
+        </div>
+            <input class="btn btn-lg btn-primary btn-block" type="button" onclick="authorCheck(document.forms[0])"value="Sign Up">
+            <input type="button" onclick="document.location.href = 'index.html'" class="btn btn-sm btn-success btn-block" value="Back">
+        </div>
     </form>
 </body>
 </html>

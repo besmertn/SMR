@@ -17,6 +17,7 @@
         $noteTitleArr = array();
         $noteContentArr = array();
         $noteDateArr = array();
+        $noteIdArr = array();
         $cnt = 0;
         if($userName != "admin"){
             $query = "SELECT * FROM notes_".$userName;
@@ -29,11 +30,14 @@
                     $noteTitleArr[$cnt] = $notes['title'];
                     $noteContentArr[$cnt] = wordwrap($notes['content'], 40, "\n",1);
                     $noteDateArr[$cnt] = $notes['date'];
+                    $noteIdArr[$cnt] = $notes['note_id'];
+                   // echo "<script type='text/javascript'> alert(".$noteContentArr[$cnt].")</script>";
                     $cnt++;
                 }
                 $_SESSION['noteTitleArr'] = $noteTitleArr;
                 $_SESSION['noteContentArr'] = $noteContentArr;
                 $_SESSION['noteDateArr'] = $noteDateArr;
+                $_SESSION['noteIdArr'] = $noteIdArr;
                 $cnt = 0;
                 if(!$_SESSION['check']){
                     $_SESSION['check'] = true;
@@ -88,10 +92,9 @@
           </div>
         <div class="row">
             <?php
-                $id = 0;
-                while($noteTitleArr[$id]){
-                    echo "<div class='col-xs-6 col-lg-6'><h2 id='title".$id."'>".$noteTitleArr[$cnt]."</h2><p id='content".$id."' hidden>".$noteContentArr[$cnt]."</p><p>".$noteShortContentArr[$cnt++]."</p><p><a class='btn btn-default' href='javascript:open(".$id.")' role='button'>View details »</a></p></div>";
-                    $id++;
+                while($noteTitleArr[$cnt]){
+                    echo "<div id='container".$noteIdArr[$cnt]."' class='col-xs-6 col-lg-6'><h2 id='title".$noteIdArr[$cnt]."'>".$noteTitleArr[$cnt]."</h2><p id='content".$noteIdArr[$cnt]."' hidden>".$noteContentArr[$cnt]."</p><p>".$noteShortContentArr[$cnt]."</p><div class='row'><p class='col-md-4'><a class='btn btn-default' href='javascript:open(".$noteIdArr[$cnt].")' role='button'>View details »</a></p><p class='col-md-4'><a class='btn btn-default' href='javascript:deleteNote(".$noteIdArr[$cnt].")' role='button'>Delete Note</a></p></div></div>";
+                    $cnt++;
                 }
             ?>
           </div>

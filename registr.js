@@ -17,6 +17,7 @@ function getXmlHttp() {
 function userNameCheck(form) {
     var status = 0;
     var elStatus = document.getElementById('name_status');
+    var elStatusLabel = document.getElementById('name_status_label');
     var name = form.elements.username.value;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'check.php', true); // Открываем асинхронное соединение
@@ -32,11 +33,18 @@ function userNameCheck(form) {
     setTimeout(function(){
       if(name.length < 31 && name.length  > 4){
         if(status == "false"){
-            elStatus.innerHTML = "OK";
+            elStatus.setAttribute('class' , 'form-group has-success');
+            elStatusLabel.innerHTML = "OK";
         }
-          else elStatus.innerHTML = "This name already exists!";
+          else {
+              elStatus.setAttribute('class' , 'form-group has-error');
+              elStatusLabel.innerHTML = "This name already exists!";
+          }
     }
-        else elStatus.innerHTML = "Incorrect name size!" ;
+        else{
+            elStatus.setAttribute('class' , 'form-group has-error');
+            elStatusLabel.innerHTML = "Incorrect name size!" ;
+        }
     }, 1000);
 
 
@@ -45,20 +53,33 @@ function passwordCheck(form){
     var status = 0;
     var elStatus = document.getElementById('pas_status');
     var elStatusTmp = document.getElementById('re_pas_status');
+    var elStatusLabel = document.getElementById('pas_status_label');
+    var elStatusTmpLabel = document.getElementById('re_pas_status_label');
     var pas = form.elements.password.value;
     var rePas = form.elements.re_password.value;
     if(pas.length < 31 && pas.length > 3){
         if(pas == rePas){
-            elStatus.innerHTML = "OK";
-            elStatusTmp.innerHTML = "OK";
+            elStatus.setAttribute('class' , 'form-group has-success');
+            elStatusTmp.setAttribute('class' , 'form-group has-success');
+            elStatusLabel.innerHTML = "OK";
+            elStatusTmpLabel.innerHTML = "OK";
         }
-        else elStatusTmp.innerHTML = "Passwords do not match!";
+        else {
+            elStatus.setAttribute('class' , 'form-group has-error');
+            elStatusTmp.setAttribute('class' , 'form-group has-error');
+            elStatusTmpLabel.innerHTML = "Passwords do not match!";
+        }
     }
-    else elStatus.innerHTML = "Incorrect password size!";
+    else {
+        elStatus.setAttribute('class' , 'form-group has-error');
+        elStatusTmp.setAttribute('class' , 'form-group has-error');
+        elStatusLabel.innerHTML = "Incorrect password size!";
+    }
 }
 function emailCheck(form){
     var status = 0;
     var elStatus = document.getElementById('email_status');
+    var elStatusLabel = document.getElementById('email_status_label');
     var email = form.elements.email.value;
     var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
     xmlhttp.open('POST', 'check.php', true); // Открываем асинхронное соединение
@@ -78,11 +99,18 @@ function emailCheck(form){
     setTimeout(function(){
       if(email.length < 31 && email.length  > 5 && tmp == 1){
         if(status == "false"){
-            elStatus.innerHTML = "OK";
+            elStatus.setAttribute('class' , 'form-group has-success');
+            elStatusLabel.innerHTML = "OK";
         }
-          else elStatus.innerHTML = "This e-mail already exists!";
+          else {
+              elStatus.setAttribute('class' , 'form-group has-error');
+              elStatusLabel.innerHTML = "This e-mail already exists!";
+          }
     }
-        else elStatus.innerHTML = "Incorrect email " ;
+        else {
+            elStatus.setAttribute('class' , 'form-group has-error');
+            elStatusLabel.innerHTML = "Incorrect email " ;
+        }
     }, 1000);
 }
 
