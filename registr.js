@@ -133,6 +133,6 @@ function authorCheck(form){
     };
     setTimeout(function(){
       if(status == "false") elStatus.innerHTML = "<div class='panel panel-warning'><div class='panel-heading'>Ошибка авторизации</div><div class='panel-body'>Такого пользователя не существует</div></div>";
-        else document.location.href = "request.php";
+        else document.location.href = "request.html";
     }, 1000);
 }

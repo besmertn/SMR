@@ -1,5 +1,10 @@
 <?php
     session_start();
+    if(!$_SESSION['check']){
+        $_SESSION['check'] = true;
+        //echo "<script type='text/javascript'>window.target.reload()</script>";
+        echo "-";
+    }
     include "dbConfig.php";
     include "content.php";
     $userName = $_SESSION['username'];
@@ -28,10 +33,7 @@
                 $_SESSION['noteDateArr'] = $noteDateArr;
                 $_SESSION['noteIdArr'] = $noteIdArr;
                 $cnt = 0;
-                if(!$_SESSION['check']){
-                    $_SESSION['check'] = true;
-                    echo "<script type='text/javascript'> window.location.reload()</script>";
-                }
+
             }
             else
             {
@@ -54,10 +56,12 @@
                          }
 
              while($noteIdArr[$cnt]){
-                    $result.="<div id='container".$noteIdArr[$cnt]."' class='col-xs-6 col-lg-6'><h2 id='title".$noteIdArr[$cnt]."'>".$noteTitleArr[$cnt]."</h2><p id='content".$noteIdArr[$cnt]."' hidden>".$noteContentArr[$cnt]."</p><p>".$noteShortContentArr[$cnt]."</p><div class='row'><p class='col-md-4'><a class='btn btn-default' href='javascript:open(".$noteIdArr[$id].")' role='button'>View details »</a></p><p class='col-md-4'><a class='btn btn-default' href='javascript:deleteNote(".$noteIdArr[$id].")' role='button'>Delete Note</a></p></div></div>";
+                    $result.="<div id='container".$noteIdArr[$cnt]."' class='col-xs-6 col-lg-6'><h2 id='title".$noteIdArr[$cnt]."'>".$noteTitleArr[$cnt]."</h2><p id='content".$noteIdArr[$cnt]."' hidden>".$noteContentArr[$cnt]."</p><p>".$noteShortContentArr[$cnt]."</p><div class='row'><p class='col-md-4'><a class='btn btn-default' href='javascript:open(".$noteIdArr[$cnt].")' role='button'>View details »</a></p><p class='col-md-4'><a class='btn btn-default' href='javascript:deleteNote(".$noteIdArr[$cnt].")' role='button'>Delete Note</a></p></div></div>";
                     $cnt++;
             }
+
             $result .="</div></div></div></div>";
             echo $result;
         mysqli_close($dbcnx);
+
 ?>

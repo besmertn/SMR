@@ -44,9 +44,10 @@ function fillingNote(){
     xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
       if (xmlhttp.readyState == 4) { // Ответ пришёл
         if(xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
-           alert(xmlhttp.responseText);
+            var result = xmlhttp.responseText;
+            if(result[0] == "-") location.reload();
             //document.getElementById('cont').innerHTML = xmlhttp.responseText; // Выводим ответ сервера
-            document.write(xmlhttp.responseText);
+            document.getElementById('doc').innerHTML = (result);
         }
       }
     };
