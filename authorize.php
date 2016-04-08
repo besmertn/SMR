@@ -12,7 +12,8 @@
         {
             while($users = mysqli_fetch_array($us, MYSQLI_ASSOC))
             {
-              if(strcmp($users['name'], $userName) == 0 && strcmp($users['password'], $password) == 0){
+              if(strcmp($users['name'], $userName) == 0 && password_verify($password,$users['password'])){
+                  $_SESSION['userid'] = $users['user_id'];
                   mysqli_close($dbcnx);
                   echo $status = "true";
               }
