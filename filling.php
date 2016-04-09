@@ -58,7 +58,7 @@
                          }
 
              while($noteIdArr[$cnt]){
-                    $result.="<div id='container".$noteIdArr[$cnt]."' class='col-xs-6 col-lg-6'><h2 id='title".$noteIdArr[$cnt]."'>".$noteTitleArr[$cnt]."</h2><p id='content".$noteIdArr[$cnt]."' hidden>".$noteContentArr[$cnt]."</p><p>".$noteShortContentArr[$cnt]."</p><div class='row'><p class='col-md-4'><a class='btn btn-default' href='javascript:open(".$noteIdArr[$cnt].")' role='button'>View details »</a></p><p class='col-md-4'><a class='btn btn-default' href='javascript:deleteNote(".$noteIdArr[$cnt].")' role='button'>Delete Note</a></p></div></div>";
+                    $result.="<div id='container".$noteIdArr[$cnt]."' class='col-xs-6 col-lg-6'><h2 id='title".$noteIdArr[$cnt]."'>".$noteTitleArr[$cnt]."</h2><h5>".$noteDateArr[$cnt]."</h5><p id='content".$noteIdArr[$cnt]."' hidden>".$noteContentArr[$cnt]."</p><p>".$noteShortContentArr[$cnt]."</p><div class='row'><p class='col-md-4'><a class='btn btn-default' href='javascript:open(".$noteIdArr[$cnt].")' role='button'>View details »</a></p><p class='col-md-4'><a class='btn btn-default' href='javascript:deleteNote(".$noteIdArr[$cnt].")' role='button'>Delete Note</a></p></div></div>";
                     $cnt++;
             }
 
