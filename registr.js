@@ -136,3 +136,57 @@ function authorCheck(form){
         else document.location.href = "request.html";
     }, 1000);
 }
+function ckeckNote(tmp){
+    var title = tmp.title.value;
+    var element = document.getElementById('inputTitleGroup');
+    var elementLabel = document.getElementById('inputTitleLabel');
+    if(title.length < 2){
+        element.setAttribute('class', 'form-group has-error');
+        elementLabel.innerHTML = "Too short";
+    }
+    else{
+        element.setAttribute('class', 'form-group');
+        elementLabel.innerHTML = "Title";
+    }
+}
+
+function getUserName(){
+    var element =  document.getElementById('person');
+    var username = "";
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'personal.php', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send("username=" + encodeURIComponent('a')); // Отправляем POST-запрос
+    xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
+      if (xmlhttp.readyState == 4) { // Ответ пришёл
+        if(xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+            element.innerHTML = xmlhttp.responseText.substr(0,xmlhttp.responseText.indexOf("*")); // Выводим ответ сервера
+            //alert(xmlhttp.responseText.substring(xmlhttp.responseText.indexOf("*")+1,xmlhttp.responseText.indexOf("+")));
+           //alert(xmlhttp.responseText.substring(xmlhttp.responseText.indexOf("+")+1,xmlhttp.responseText.indexOf("%")));
+
+        }
+      }
+    };
+}
+
+function profile(form){
+    var name = form.elements.userName;
+    var email = form.elements.email;
+    var count = form.elements.count;
+    var element =  document.getElementById('person');
+    var xmlhttp = getXmlHttp(); // Создаём объект XMLHTTP
+    xmlhttp.open('POST', 'personal.php', true); // Открываем асинхронное соединение
+    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Отправляем кодировку
+    xmlhttp.send(); // Отправляем POST-запрос
+    xmlhttp.onreadystatechange = function() { // Ждём ответа от сервера
+      if (xmlhttp.readyState == 4) { // Ответ пришёл
+        if(xmlhttp.status == 200) { // Сервер вернул код 200 (что хорошо)
+            element.innerHTML = xmlhttp.responseText.substr(0,xmlhttp.responseText.indexOf("*")); // Выводим ответ сервера
+            name.value = xmlhttp.responseText.substr(0,xmlhttp.responseText.indexOf("*"));
+            count.value = xmlhttp.responseText.substring(xmlhttp.responseText.indexOf("*")+1,xmlhttp.responseText.indexOf("+"));
+            email.value = xmlhttp.responseText.substring(xmlhttp.responseText.indexOf("+")+1,xmlhttp.responseText.indexOf("%"));
+
+        }
+      }
+    };
+}

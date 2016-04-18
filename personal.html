@@ -6,7 +6,7 @@
     <script src="registr.js"></script>
     <link rel='stylesheet' href='css/bootstrap.min.css' type='text/css' media='all'>
 </head>
-<body onload="getUserName()">
+<body onload="profile(document.forms[0])">
      <nav class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
         <div class="navbar-header">
@@ -21,7 +21,7 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="request.html">Show Notes</a></li>
-            <li class="active"><a href="#about">Add Note</a></li>
+            <li><a href="main.html">Add Note</a></li>
             <li><a href="logOut.php">Log Out</a></li>
           </ul>
         </div>
@@ -35,23 +35,27 @@
         </p>
             <div class="jumbotron">
             </div>
-            <div style="width:60%" class="container">
+            <h2 align="center">Личный кабинет</h2><br/>
+            <div style="width:60%; margin-left:5%" class="container">
                 <form action="addNote.php" method="POST" class="form-horizontal" role="form">
                   <div class="form-group" id="inputTitleGroup">
-                    <label for="inputTitle" id="inputTitleLabel"  class="col-sm-2 control-label">Заголовок</label>
-                    <div class="col-sm-10">
-                      <input autofocus type="text" name="title" onchange="ckeckNote(document.forms[0])"  class="form-control" id="inputTitle" placeholder="Заголовок заметки">
+                    <label for="inputTitle" id="inputTitleLabel"  class="col-sm-2 control-label">Пользователь</label>
+                    <div class="col-sm-5">
+                      <input type="text" name="userName" class="form-control" id="userName" disabled>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputContent" class="col-sm-2 control-label">Заметка</label>
-                    <div class="col-sm-10">
-                      <textarea class="form-control" id="inputContent" name="content" rows="15" cols="40"> </textarea>
+                    <label for="inputContent" class="col-sm-2 control-label">E-mail</label>
+                    <div class="col-sm-5">
+                        <input type="text" name="email" class="form-control" id="email" disabled>
+
                     </div>
                   </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-default">Добавить</button>
+                    <div class="form-group">
+                    <label for="inputContent" class="col-sm-2 control-label">Количество заметок</label>
+                    <div class="col-sm-5">
+                        <input type="text" name="count" class="form-control" id="count" disabled>
+
                     </div>
                   </div>
                 </form>
