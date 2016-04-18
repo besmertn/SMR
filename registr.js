@@ -35,15 +35,18 @@ function userNameCheck(form) {
         if(status == "false"){
             elStatus.setAttribute('class' , 'form-group has-success');
             elStatusLabel.innerHTML = "OK";
+            form.elements.submit.disabled = false;
         }
           else {
               elStatus.setAttribute('class' , 'form-group has-error');
               elStatusLabel.innerHTML = "This name already exists!";
+              form.elements.submit.setAttribute('disabled','disabled');
           }
     }
         else{
             elStatus.setAttribute('class' , 'form-group has-error');
             elStatusLabel.innerHTML = "Incorrect name size!" ;
+            form.elements.submit.setAttribute('disabled','disabled');
         }
     }, 1000);
 
@@ -63,17 +66,20 @@ function passwordCheck(form){
             elStatusTmp.setAttribute('class' , 'form-group has-success');
             elStatusLabel.innerHTML = "OK";
             elStatusTmpLabel.innerHTML = "OK";
+            form.elements.submit.disabled = false;
         }
         else {
             elStatus.setAttribute('class' , 'form-group has-error');
             elStatusTmp.setAttribute('class' , 'form-group has-error');
             elStatusTmpLabel.innerHTML = "Passwords do not match!";
+            form.elements.submit.setAttribute('disabled','disabled');
         }
     }
     else {
         elStatus.setAttribute('class' , 'form-group has-error');
         elStatusTmp.setAttribute('class' , 'form-group has-error');
         elStatusLabel.innerHTML = "Incorrect password size!";
+        form.elements.submit.setAttribute('disabled','disabled');
     }
 }
 function emailCheck(form){
@@ -101,15 +107,18 @@ function emailCheck(form){
         if(status == "false"){
             elStatus.setAttribute('class' , 'form-group has-success');
             elStatusLabel.innerHTML = "OK";
+            form.elements.submit.disabled = false;
         }
           else {
               elStatus.setAttribute('class' , 'form-group has-error');
               elStatusLabel.innerHTML = "This e-mail already exists!";
+              form.elements.submit.setAttribute('disabled','disabled');
           }
     }
         else {
             elStatus.setAttribute('class' , 'form-group has-error');
             elStatusLabel.innerHTML = "Incorrect email " ;
+            form.elements.submit.setAttribute('disabled','disabled');
         }
     }, 1000);
 }
